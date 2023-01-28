@@ -15,6 +15,7 @@ function App() {
   return (
     <Fragment>
       <Routes>
+        
       <Route path='/' element={isAuth ? <Welcome /> : <SignUp />}></Route>
       {/* <Route path='/welcome' element={isAuth ? <Welcome /> : <SignUp />} /> */}
       <Route path='/forgotPassword' element={!isAuth ? <ForgotPassword /> : <Welcome />} />

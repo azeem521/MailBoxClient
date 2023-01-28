@@ -31,9 +31,10 @@ const SubjectchangeHandler=(e)=>{
     const submitHandler=(e)=>{
         e.preventDefault();
         const sender=localStorage.getItem('email');
+        const sender1=sender.replace(/[@.]/g,'');
         const receiver=email.replace(/['@','.']/g,'');
        // console.log(sender,receiver);
-       fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/${sender}.json`,{
+       fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/${sender1}.json`,{
         method:'POST',
         body:JSON.stringify({
             subject:subject,
@@ -47,11 +48,13 @@ const SubjectchangeHandler=(e)=>{
             alert(res.error.message)
         }else{
             console.log('successfull');
+            console.log(sender1);
         }
        })
        fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/${receiver}.json`,{
         method:'POST',
         body:JSON.stringify({
+            sender:sender,
             subject:subject,
             message:editorState.getCurrentContent().getPlainText()
         }),
