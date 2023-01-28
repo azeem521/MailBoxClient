@@ -7,6 +7,7 @@ import Welcome from './components/Pages/Welcome';
 import {useSelector} from 'react-redux'
 import ForgotPassword from './components/Pages/ForgotPassword';
 import Send from './components/Email/Send';
+import ReadMsg from './components/Email/ReadMsg';
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
       <Route path='/' element={isAuth ? <Welcome /> : <SignUp />}></Route>
       {/* <Route path='/welcome' element={isAuth ? <Welcome /> : <SignUp />} /> */}
       <Route path='/forgotPassword' element={!isAuth ? <ForgotPassword /> : <Welcome />} />
-      <Route path='/send' element={isAuth ? <Send /> : <SignUp />} /> 
+      <Route path='/send' element={isAuth ? <Send /> : <SignUp />} />
+      <Route path='/message/:id' element={isAuth ? <ReadMsg /> : <SignUp />} /> 
       </Routes>
       </Fragment>
   );
