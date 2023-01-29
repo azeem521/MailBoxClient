@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { mailSliceAction } from '../storeRedux/emailReducer';
@@ -7,7 +8,18 @@ import classes from './Inbox.module.css'
 const Inbox = () => {
     const dispatch=useDispatch();
     const mailInInbox=useSelector(state=>state.mail.mails);
+    const [reRender,setreRender]=useState(true)
     const myEmail=localStorage.getItem('email').replace(/['@','.']/g,'');
+
+    const deleteHandler=async(id)=>{
+    const response= await fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/inbox/${myEmail}/${id}.json`,{
+        method:'DELETE'
+    })  
+    const deleteData=await response.json();
+    setreRender((prev)=>!prev)
+    console.log('deleteddddddInbox');
+
+    }
 
     let data=[];
 
@@ -25,7 +37,7 @@ const Inbox = () => {
           
         }
         fetchDaata();
-    },[])
+    },[reRender])
     console.log(data,'data');
   return (
     <div className={classes.main}>
@@ -43,6 +55,9 @@ const Inbox = () => {
            {item.dot && <div className={classes.dot}>
             {/* //dot logic */}
             </div>}
+            <div className={classes.delete}>
+                <button onClick={deleteHandler.bind(null,item.id)}>Delete</button>
+            </div>
             </div>
                 ))
 
