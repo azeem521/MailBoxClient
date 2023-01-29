@@ -18,7 +18,7 @@ const Welcome = () => {
   intervalID = setInterval(()=>{
     setreRender((prev)=>!prev);
     console.log('intervall',intervalID);
-  }, 7000);
+  }, 3000);
 
   const clearInteravl=()=>{
     clearInterval(intervalID);
@@ -35,7 +35,7 @@ const Welcome = () => {
         const reponse=await fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/inbox/${myEmail}.json`);
 
         const mailData=await reponse.json();
-        // console.log('useEffectcalled', mailData);
+        console.log('useEffectcalled');
         for(let key in mailData){
             // data=[{id:key,...mailData[key]},...data]
             if(mailData[key].dot===true){
@@ -49,11 +49,11 @@ const Welcome = () => {
       
     }
     fetchDaata();
+    clearInterval(intervalID);
 },[reRender])
 
   return (
     <Fragment>
-      {/* <button onClick={clearInteravl}>clearInteravl</button> */}
       <div className={classes.main}>
         <div className={classes.header}>
           <div className={classes.welcome}>Welcome to Mail Box</div>
