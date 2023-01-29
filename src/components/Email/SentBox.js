@@ -30,8 +30,8 @@ const SentBox = () => {
     console.log(data,'data');
   return (
     <div className={classes.main}>
-       {
-  <div className={classes.row}>
+       {mailInInbox.length>0 ?
+  (<div className={classes.row}>
             {
 
                 mailInInbox.map((item)=>(
@@ -45,7 +45,7 @@ const SentBox = () => {
                 ))
 
             }
-        </div>}
+        </div>) : <p>Sentbox is empty</p>}
     </div>
   )
 }

@@ -40,6 +40,7 @@ const SubjectchangeHandler=(e)=>{
             to:email,
             subject:subject,
             message:editorState.getCurrentContent().getPlainText()
+           
         }),
         headers:{
             'Content-Type':'application/json'
@@ -57,7 +58,8 @@ const SubjectchangeHandler=(e)=>{
         body:JSON.stringify({
             sender:sender,
             subject:subject,
-            message:editorState.getCurrentContent().getPlainText()
+            message:editorState.getCurrentContent().getPlainText(),
+            dot:true
         }),
         headers:{
             'Content-Type':'application/json'

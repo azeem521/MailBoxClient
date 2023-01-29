@@ -38,8 +38,11 @@ const Inbox = () => {
                     <div className={classes.user}>From :- {item.sender}</div>
             <div className={classes.subject}>{item.subject}</div>
             <div className={classes.msg}>
-                <NavLink to={`/message/${item.id}`}>message</NavLink>
+                <NavLink to={`/message/${item.id}`} style={{textDecoration:'none'}}>{'{message}'}</NavLink>
             </div>
+           {item.dot && <div className={classes.dot}>
+            {/* //dot logic */}
+            </div>}
             </div>
                 ))
 
