@@ -51,6 +51,9 @@ const SubjectchangeHandler=(e)=>{
         }else{
             console.log('successfull');
             console.log(sender1);
+            setEditorState('');
+            setSubject('');
+            setEmail('');
         }
        })
        fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/inbox/${receiver}.json`,{

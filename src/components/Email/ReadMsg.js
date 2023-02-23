@@ -6,12 +6,12 @@ import classes from './ReadMsg.module.css';
 
 const ReadMsg = () => {
     const {id}=useParams();
-    const mails=useSelector(state=>state.mail.sendMails)
+    const mails=useSelector(state=>state.mail.mails);
     const myEmail=localStorage.getItem('email').replace(/['@','.']/g,'');
 
     const singleMail=mails.filter((item)=>item.id===id);
     const message=singleMail[0].message
-    console.log(singleMail,'message');
+    console.log(mails,'Single-message');
     useEffect(()=>{
       const fetchData=async ()=>{
         const response=await fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/inbox/${myEmail}/${id}.json`,{

@@ -51,8 +51,11 @@ const SentBox = () => {
                     <div className={classes.row1} key={item.id}>
                     <div className={classes.user}>To :- {item.to}</div>
             <div className={classes.subject}>Subject :- {item.subject}</div>
-            <div className={classes.msg}>
+            {/* <div className={classes.msg}>
                 <NavLink to={`/message/${item.id}`}>{'{message}'}</NavLink>
+            </div> */}
+            <div className={classes.msg}>
+                message :- {item.message}
             </div>
              <div className={classes.delete}>
                 <button onClick={deleteHandler.bind(null,item.id)}>Delete</button>
