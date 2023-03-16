@@ -14,18 +14,23 @@ const ReadMsg = () => {
     console.log(mails,'Single-message');
     useEffect(()=>{
       const fetchData=async ()=>{
-        const response=await fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/inbox/${myEmail}/${id}.json`,{
-          method:'PATCH',
-          body:JSON.stringify({
-            dot:false
-          }),
-          headers:{
-            'Content-Type':'application/json'
-          }
-        })
-        const data=await response.json();
-        console.log(data);
+      try {
+          const response=await fetch(`https://mailboxdatabase-405d3-default-rtdb.firebaseio.com/inbox/${myEmail}/${id}.json`,{
+            method:'PATCH',
+            body:JSON.stringify({
+              dot:false
+            }),
+            headers:{
+              'Content-Type':'application/json'
+            }
+          })
+          const data=await response.json();
+          console.log(data);
+        }
+       catch (error) {
+        alert(error)
       }
+    }
       fetchData();
     },[])
 

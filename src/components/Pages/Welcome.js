@@ -17,7 +17,6 @@ const Welcome = () => {
   let intervalID;
   intervalID = setInterval(()=>{
     setreRender((prev)=>!prev);
-    // console.log('intervall',intervalID);
   }, 3000);
 
   const clearInteravl=()=>{
@@ -32,24 +31,23 @@ const Welcome = () => {
 
   useEffect(()=>{
     const fetchDaata=async()=>{
-        const reponse=await fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/inbox/${myEmail}.json`);
+       try {
+        const reponse=await fetch(`https://mailboxdatabase-405d3-default-rtdb.firebaseio.com/inbox/${myEmail}.json`);
 
         const mailData=await reponse.json();
-        // console.log('useEffectcalled');
         for(let key in mailData){
-            // data=[{id:key,...mailData[key]},...data]
             if(mailData[key].dot===true){
               noOfUnread++
-              // console.log(noOfUnread,'noOfUnread');
             }
         }
-        // console.log(noOfUnread,'noOfUnread');
 
         dispatch(mailSliceAction.updateUnread(noOfUnread))
+       } catch (error) {
+        alert(error)
+       }
       
     }
     fetchDaata();
-    // console.log(intervalID);
     return clearInterval(intervalID);
 },[reRender])
 

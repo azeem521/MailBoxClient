@@ -34,7 +34,7 @@ const SubjectchangeHandler=(e)=>{
         const sender1=sender.replace(/[@.]/g,'');
         const receiver=email.replace(/['@','.']/g,'');
        // console.log(sender,receiver);
-       fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/sentbox/${sender1}.json`,{
+       fetch(`https://mailboxdatabase-405d3-default-rtdb.firebaseio.com/sentbox/${sender1}.json`,{
         method:'POST',
         body:JSON.stringify({
             to:email,
@@ -56,7 +56,7 @@ const SubjectchangeHandler=(e)=>{
             setEmail('');
         }
        })
-       fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/inbox/${receiver}.json`,{
+       fetch(`https://mailboxdatabase-405d3-default-rtdb.firebaseio.com/inbox/${receiver}.json`,{
         method:'POST',
         body:JSON.stringify({
             sender:sender,

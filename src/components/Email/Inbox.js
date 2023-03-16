@@ -12,20 +12,24 @@ const Inbox = () => {
     const myEmail=localStorage.getItem('email').replace(/['@','.']/g,'');
 
     const deleteHandler=async(id)=>{
-    const response= await fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/inbox/${myEmail}/${id}.json`,{
+    try {
+        const response= await fetch(`https://mailboxdatabase-405d3-default-rtdb.firebaseio.com/inbox/${myEmail}/${id}.json`,{
         method:'DELETE'
     })  
     const deleteData=await response.json();
+    console.log(deleteData);
     setreRender((prev)=>!prev)
-    console.log('deleteddddddInbox');
-
+    } catch (error) {
+        alert(error)
+    }
     }
 
     let data=[];
 
     useEffect(()=>{
         const fetchDaata=async()=>{
-            const reponse=await fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/inbox/${myEmail}.json`);
+          try {
+            const reponse=await fetch(`https://mailboxdatabase-405d3-default-rtdb.firebaseio.com/inbox/${myEmail}.json`);
 
             const mailData=await reponse.json();
             console.log('useEffectcalled', mailData);
@@ -34,11 +38,13 @@ const Inbox = () => {
             }
 
             dispatch(mailSliceAction.updateInbox(data))
+          } catch (error) {
+            alert(error)
+          }
           
         }
         fetchDaata();
     },[reRender])
-    console.log(data,'data');
   return (
     <div className={classes.main}>
        {mailInInbox.length>0 ?

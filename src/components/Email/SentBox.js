@@ -13,12 +13,15 @@ const SentBox = () => {
     const myEmail=localStorage.getItem('email').replace(/['@','.']/g,'');
 
     const deleteHandler=async(id)=>{
-    const response= await fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/sentbox/${myEmail}/${id}.json`,{
-        method:'DELETE'
-    })  
-    const deleteData=await response.json();
-    setreRender((prev)=>!prev)
-    console.log('deletedddddd');
+        try {
+            const response= await fetch(`https://mailboxdatabase-405d3-default-rtdb.firebaseio.com/sentbox/${myEmail}/${id}.json`,{
+                method:'DELETE'
+            })  
+            const deleteData=await response.json();
+            setreRender((prev)=>!prev)
+        } catch (error) {
+            alert(error)
+        }
     }
 
     
@@ -27,7 +30,8 @@ const SentBox = () => {
 
     useEffect(()=>{
         const fetchDaata=async()=>{
-            const reponse=await fetch(`https://book-search-app-62511-default-rtdb.firebaseio.com/sentbox/${myEmail}.json`);
+           try {
+            const reponse=await fetch(`https://mailboxdatabase-405d3-default-rtdb.firebaseio.com/sentbox/${myEmail}.json`);
 
             const mailData=await reponse.json();
             console.log('useEffectcalled', mailData);
@@ -37,6 +41,9 @@ const SentBox = () => {
 
             dispatch(mailSliceAction.updateSentbox(data))
           console.log(mailInSentbox,'mailInSentbox');
+           } catch (error) {
+            alert(error)
+           }
         }
         fetchDaata();
     },[reRender])
